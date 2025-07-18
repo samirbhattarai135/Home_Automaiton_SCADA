@@ -1,0 +1,117 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "height": 905,
+      "width": 861
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "basis": "32px"
+        },
+        "props": {
+          "style": {
+            "alignItems": "center"
+          },
+          "text": "Smart Home SCADA Dashboard",
+          "textStyle": {
+            "alignSelf": "stretch",
+            "fontSize": 24,
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Living Room Temperature",
+          "tooltip": {
+            "text": "Living",
+            "width": 50
+          }
+        },
+        "position": {
+          "basis": "175px",
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.value": {
+            "binding": {
+              "config": {
+                "fallbackDelay": 2.5,
+                "mode": "direct",
+                "tagPath": "[default]Home/LivingRoom/Temperature_C"
+              },
+              "type": "tag"
+            }
+          }
+        },
+        "type": "ia.chart.simple-gauge"
+      },
+      {
+        "meta": {
+          "name": "Kitchen Humidity"
+        },
+        "position": {
+          "basis": "175px"
+        },
+        "propConfig": {
+          "props.value": {
+            "binding": {
+              "config": {
+                "fallbackDelay": 2.5,
+                "mode": "direct",
+                "tagPath": "[default]Home/Kitchen/Humidity_"
+              },
+              "type": "tag"
+            }
+          }
+        },
+        "type": "ia.chart.simple-gauge"
+      },
+      {
+        "meta": {
+          "name": "Label_0"
+        },
+        "position": {
+          "basis": "32px"
+        },
+        "props": {
+          "text": "Living Room Lights"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_1"
+        },
+        "position": {
+          "basis": "32px"
+        },
+        "props": {
+          "text": "Kitchen"
+        },
+        "type": "ia.display.label"
+      }
+    ],
+    "meta": {
+      "name": "MainView"
+    },
+    "props": {
+      "alignContent": "flex-start",
+      "alignItems": "center",
+      "direction": "column",
+      "style": {
+        "overflow": "hidden"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

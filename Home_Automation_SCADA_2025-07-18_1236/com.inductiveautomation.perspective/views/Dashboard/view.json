@@ -1,0 +1,1721 @@
+{
+  "custom": {},
+  "params": {
+    "endDate": {
+      "Type": "dateTime",
+      "default": "now()"
+    },
+    "startDate": {
+      "Type": "DateTime",
+      "default": "addDays(now(), -7)"
+    }
+  },
+  "propConfig": {
+    "params.endDate": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.startDate": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 918,
+      "width": 1235
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Label"
+            },
+            "position": {
+              "basis": "32px"
+            },
+            "props": {
+              "style": {
+                "alignItems": "center",
+                "fontSize": 24,
+                "fontWeight": "bold"
+              },
+              "text": "Smart Home SCADA Dashboard"
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "meta": {
+          "name": "Header"
+        },
+        "position": {
+          "basis": "50px",
+          "shrink": 0
+        },
+        "props": {
+          "alignContent": "center",
+          "alignItems": "center",
+          "direction": "column",
+          "justify": "center",
+          "style": {
+            "background-color": "#f5e3d4"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "Label"
+                },
+                "position": {
+                  "basis": "50px",
+                  "shrink": 0
+                },
+                "props": {
+                  "style": {
+                    "alignItems": "center",
+                    "background-color": "#f3fff0",
+                    "borderRadius": "10px",
+                    "fontSize": "20px",
+                    "fontWeight": "bolder",
+                    "marginLeft": "10px",
+                    "marginRight": "10px",
+                    "marginTop": "10px"
+                  },
+                  "text": "Alarm Status"
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "meta": {
+                              "name": "Label"
+                            },
+                            "position": {
+                              "basis": "50px",
+                              "grow": 1
+                            },
+                            "props": {
+                              "style": {
+                                "background-color": "white"
+                              },
+                              "text": "Fire Alarm",
+                              "textStyle": {
+                                "alignSelf": "center"
+                              }
+                            },
+                            "type": "ia.display.label"
+                          }
+                        ],
+                        "meta": {
+                          "name": "Label"
+                        },
+                        "position": {
+                          "basis": "50px",
+                          "shrink": 0
+                        },
+                        "type": "ia.container.flex"
+                      },
+                      {
+                        "meta": {
+                          "name": "FlexContainer"
+                        },
+                        "position": {
+                          "basis": "50px",
+                          "grow": 1
+                        },
+                        "propConfig": {
+                          "props.style.background-color": {
+                            "binding": {
+                              "config": {
+                                "expression": "if({[default]Home/Alarms/FireAlarmActive} \u003d 1, \"red\", \"green\")"
+                              },
+                              "type": "expr"
+                            }
+                          }
+                        },
+                        "props": {
+                          "alignContent": "center",
+                          "alignItems": "center",
+                          "style": {
+                            "key": "value"
+                          }
+                        },
+                        "type": "ia.container.flex"
+                      }
+                    ],
+                    "meta": {
+                      "name": "Fire Alarm Status"
+                    },
+                    "position": {
+                      "basis": "300px",
+                      "grow": 1
+                    },
+                    "props": {
+                      "direction": "column",
+                      "style": {
+                        "borderRadius": "10px",
+                        "marginLeft": "10px",
+                        "marginRight": "10px"
+                      }
+                    },
+                    "type": "ia.container.flex"
+                  },
+                  {
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "meta": {
+                              "name": "Label"
+                            },
+                            "position": {
+                              "basis": "50px",
+                              "grow": 1
+                            },
+                            "props": {
+                              "style": {
+                                "background-color": "white"
+                              },
+                              "text": "Humidity",
+                              "textStyle": {
+                                "alignSelf": "center"
+                              }
+                            },
+                            "type": "ia.display.label"
+                          }
+                        ],
+                        "meta": {
+                          "name": "Label"
+                        },
+                        "position": {
+                          "basis": "50px",
+                          "shrink": 0
+                        },
+                        "type": "ia.container.flex"
+                      },
+                      {
+                        "meta": {
+                          "name": "FlexContainer"
+                        },
+                        "position": {
+                          "basis": "50px",
+                          "grow": 1
+                        },
+                        "propConfig": {
+                          "props.style.background-color": {
+                            "binding": {
+                              "config": {
+                                "fallbackDelay": 2.5,
+                                "mode": "direct",
+                                "tagPath": "[default]Home/Kitchen/Humidity_"
+                              },
+                              "transforms": [
+                                {
+                                  "code": "\tv \u003d max(0, min(100, value))\n\tred \u003d int((v / 100) * 255)\n\tgreen \u003d int((1 - v / 100) * 255)\n\tblue \u003d 0\n\treturn \"#{:02X}{:02X}{:02X}\".format(red, green, blue)",
+                                  "type": "script"
+                                }
+                              ],
+                              "type": "tag"
+                            }
+                          }
+                        },
+                        "props": {
+                          "alignContent": "center",
+                          "alignItems": "center",
+                          "style": {
+                            "key": "value"
+                          }
+                        },
+                        "type": "ia.container.flex"
+                      }
+                    ],
+                    "meta": {
+                      "name": "Humidity"
+                    },
+                    "position": {
+                      "basis": "300px",
+                      "grow": 1
+                    },
+                    "props": {
+                      "direction": "column",
+                      "style": {
+                        "borderRadius": "10px",
+                        "marginRight": "10px"
+                      }
+                    },
+                    "type": "ia.container.flex"
+                  },
+                  {
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "meta": {
+                              "name": "Label"
+                            },
+                            "position": {
+                              "basis": "50px",
+                              "grow": 1
+                            },
+                            "props": {
+                              "style": {
+                                "background-color": "white"
+                              },
+                              "text": "Electrical",
+                              "textStyle": {
+                                "alignSelf": "center"
+                              }
+                            },
+                            "type": "ia.display.label"
+                          }
+                        ],
+                        "meta": {
+                          "name": "Label"
+                        },
+                        "position": {
+                          "basis": "50px",
+                          "shrink": 0
+                        },
+                        "type": "ia.container.flex"
+                      },
+                      {
+                        "meta": {
+                          "name": "FlexContainer"
+                        },
+                        "position": {
+                          "basis": "50px",
+                          "grow": 1
+                        },
+                        "propConfig": {
+                          "props.style.background-color": {
+                            "binding": {
+                              "config": {
+                                "expression": "if({[default]Home/Alarms/Current Alarm} \u003e 15, \"red\", \"green\")"
+                              },
+                              "type": "expr"
+                            }
+                          }
+                        },
+                        "props": {
+                          "alignContent": "center",
+                          "alignItems": "center",
+                          "style": {
+                            "key": "value"
+                          }
+                        },
+                        "type": "ia.container.flex"
+                      }
+                    ],
+                    "meta": {
+                      "name": "Electrical"
+                    },
+                    "position": {
+                      "basis": "300px",
+                      "grow": 1
+                    },
+                    "props": {
+                      "direction": "column",
+                      "style": {
+                        "borderRadius": "10px",
+                        "marginRight": "10px"
+                      }
+                    },
+                    "type": "ia.container.flex"
+                  }
+                ],
+                "meta": {
+                  "name": "Each Alarms"
+                },
+                "position": {
+                  "basis": "100px",
+                  "shrink": 0
+                },
+                "props": {
+                  "style": {
+                    "marginTop": "10px"
+                  }
+                },
+                "type": "ia.container.flex"
+              }
+            ],
+            "meta": {
+              "name": "Alarms Status"
+            },
+            "position": {
+              "basis": "180px",
+              "shrink": 0
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "background-color": "#f5e3d4"
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "meta": {
+              "name": "Rooms Label"
+            },
+            "position": {
+              "basis": "50px",
+              "shrink": 0
+            },
+            "props": {
+              "style": {
+                "alignItems": "center",
+                "background-color": "#f3fff0",
+                "borderRadius": "10px",
+                "fontSize": "20px",
+                "fontWeight": "bolder",
+                "marginLeft": "10px",
+                "marginRight": "10px",
+                "marginTop": 0
+              },
+              "text": "Rooms"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "meta": {
+                          "name": "Label"
+                        },
+                        "position": {
+                          "basis": "50px",
+                          "grow": 1
+                        },
+                        "props": {
+                          "style": {
+                            "alignItems": "center",
+                            "fontSize": 16,
+                            "fontWeight": "500"
+                          },
+                          "text": "Bedrooms",
+                          "textStyle": {
+                            "alignItems": "center"
+                          }
+                        },
+                        "type": "ia.display.label"
+                      }
+                    ],
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "50px",
+                      "shrink": 0
+                    },
+                    "props": {
+                      "alignContent": "center",
+                      "alignItems": "center",
+                      "justify": "center"
+                    },
+                    "type": "ia.container.flex"
+                  },
+                  {
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "children": [
+                              {
+                                "meta": {
+                                  "name": "ToggleSwitch"
+                                },
+                                "position": {
+                                  "basis": "96px",
+                                  "grow": 1
+                                },
+                                "propConfig": {
+                                  "props.selected": {
+                                    "binding": {
+                                      "config": {
+                                        "bidirectional": true,
+                                        "fallbackDelay": 2.5,
+                                        "mode": "direct",
+                                        "tagPath": "[default]Home/Bedroom/LightStatus"
+                                      },
+                                      "type": "tag"
+                                    }
+                                  }
+                                },
+                                "props": {
+                                  "label": {
+                                    "position": "left",
+                                    "style": {
+                                      "alignItems": "stretch"
+                                    },
+                                    "text": "Lights"
+                                  }
+                                },
+                                "type": "ia.input.toggle-switch"
+                              }
+                            ],
+                            "meta": {
+                              "name": "Light"
+                            },
+                            "position": {
+                              "basis": "30px",
+                              "grow": 1
+                            },
+                            "props": {
+                              "alignContent": "flex-start",
+                              "alignItems": "flex-start"
+                            },
+                            "type": "ia.container.flex"
+                          },
+                          {
+                            "children": [
+                              {
+                                "meta": {
+                                  "name": "ToggleSwitch"
+                                },
+                                "position": {
+                                  "basis": "96px"
+                                },
+                                "propConfig": {
+                                  "props.selected": {
+                                    "binding": {
+                                      "config": {
+                                        "fallbackDelay": 2.5,
+                                        "mode": "direct",
+                                        "tagPath": "[default]Home/Bedroom/FanStatus"
+                                      },
+                                      "type": "tag"
+                                    }
+                                  }
+                                },
+                                "props": {
+                                  "label": {
+                                    "position": "left",
+                                    "text": "Fan"
+                                  }
+                                },
+                                "type": "ia.input.toggle-switch"
+                              }
+                            ],
+                            "meta": {
+                              "name": "Fan"
+                            },
+                            "position": {
+                              "basis": "50px",
+                              "grow": 1
+                            },
+                            "props": {
+                              "alignItems": "flex-start",
+                              "justify": "center"
+                            },
+                            "type": "ia.container.flex"
+                          }
+                        ],
+                        "meta": {
+                          "name": "Light Status"
+                        },
+                        "position": {
+                          "basis": "200px",
+                          "grow": 1
+                        },
+                        "props": {
+                          "alignContent": "center",
+                          "alignItems": "center",
+                          "direction": "column",
+                          "style": {
+                            "background-color": "#f2f2ff",
+                            "borderRadius": "10px",
+                            "marginBottom": "10px",
+                            "marginLeft": "10px"
+                          }
+                        },
+                        "type": "ia.container.flex"
+                      },
+                      {
+                        "children": [
+                          {
+                            "children": [
+                              {
+                                "meta": {
+                                  "name": "Label"
+                                },
+                                "position": {
+                                  "basis": "50px",
+                                  "grow": 1
+                                },
+                                "props": {
+                                  "text": "Temperature"
+                                },
+                                "type": "ia.display.label"
+                              }
+                            ],
+                            "meta": {
+                              "name": "Label"
+                            },
+                            "position": {
+                              "basis": "40px",
+                              "shrink": 0
+                            },
+                            "props": {
+                              "alignContent": "flex-start",
+                              "alignItems": "center"
+                            },
+                            "type": "ia.container.flex"
+                          },
+                          {
+                            "meta": {
+                              "name": "LedDisplay"
+                            },
+                            "position": {
+                              "basis": "50px"
+                            },
+                            "propConfig": {
+                              "props.value": {
+                                "binding": {
+                                  "config": {
+                                    "fallbackDelay": 2.5,
+                                    "mode": "direct",
+                                    "tagPath": "[default]Home/Bedroom/Temperature_C"
+                                  },
+                                  "type": "tag"
+                                }
+                              }
+                            },
+                            "type": "ia.display.led-display"
+                          }
+                        ],
+                        "meta": {
+                          "name": "Temperature"
+                        },
+                        "position": {
+                          "basis": "200px",
+                          "grow": 1
+                        },
+                        "props": {
+                          "alignContent": "flex-start",
+                          "alignItems": "center",
+                          "direction": "column",
+                          "style": {
+                            "background-color": "#f2f2ff",
+                            "borderRadius": "10px",
+                            "marginBottom": "10px",
+                            "marginLeft": "10px",
+                            "marginRight": "10px"
+                          }
+                        },
+                        "type": "ia.container.flex"
+                      }
+                    ],
+                    "meta": {
+                      "name": "Datas"
+                    },
+                    "position": {
+                      "basis": "100px",
+                      "grow": 1
+                    },
+                    "props": {
+                      "justify": "space-between"
+                    },
+                    "type": "ia.container.flex"
+                  }
+                ],
+                "meta": {
+                  "name": "Bedroom"
+                },
+                "position": {
+                  "basis": "300px",
+                  "grow": 1
+                },
+                "props": {
+                  "direction": "column",
+                  "style": {
+                    "background-color": "#f2fff3",
+                    "borderRadius": "10px",
+                    "marginLeft": "10px",
+                    "marginLeft_1": "10px"
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "meta": {
+                          "name": "Label"
+                        },
+                        "position": {
+                          "basis": "50px",
+                          "grow": 1
+                        },
+                        "props": {
+                          "style": {
+                            "alignItems": "center",
+                            "fontSize": 16,
+                            "fontWeight": "500"
+                          },
+                          "text": "Living Room",
+                          "textStyle": {
+                            "alignItems": "center"
+                          }
+                        },
+                        "type": "ia.display.label"
+                      }
+                    ],
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "50px",
+                      "shrink": 0
+                    },
+                    "props": {
+                      "alignContent": "center",
+                      "alignItems": "center",
+                      "justify": "center"
+                    },
+                    "type": "ia.container.flex"
+                  },
+                  {
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "children": [
+                              {
+                                "meta": {
+                                  "name": "ToggleSwitch"
+                                },
+                                "position": {
+                                  "basis": "96px",
+                                  "grow": 1
+                                },
+                                "propConfig": {
+                                  "props.selected": {
+                                    "binding": {
+                                      "config": {
+                                        "fallbackDelay": 2.5,
+                                        "mode": "direct",
+                                        "tagPath": "[default]Home/LivingRoom/LightStatus"
+                                      },
+                                      "type": "tag"
+                                    }
+                                  }
+                                },
+                                "props": {
+                                  "label": {
+                                    "position": "left",
+                                    "text": "Lights"
+                                  }
+                                },
+                                "type": "ia.input.toggle-switch"
+                              }
+                            ],
+                            "meta": {
+                              "name": "Light"
+                            },
+                            "position": {
+                              "basis": "40px",
+                              "grow": 1
+                            },
+                            "props": {
+                              "alignContent": "center",
+                              "alignItems": "center",
+                              "direction": "column"
+                            },
+                            "type": "ia.container.flex"
+                          },
+                          {
+                            "children": [
+                              {
+                                "meta": {
+                                  "name": "ToggleSwitch"
+                                },
+                                "position": {
+                                  "basis": "96px"
+                                },
+                                "propConfig": {
+                                  "props.selected": {
+                                    "binding": {
+                                      "config": {
+                                        "fallbackDelay": 2.5,
+                                        "mode": "direct",
+                                        "tagPath": "[default]Home/LivingRoom/LightStatus"
+                                      },
+                                      "type": "tag"
+                                    }
+                                  }
+                                },
+                                "props": {
+                                  "label": {
+                                    "position": "left",
+                                    "text": "Fan"
+                                  }
+                                },
+                                "type": "ia.input.toggle-switch"
+                              }
+                            ],
+                            "meta": {
+                              "name": "Fan"
+                            },
+                            "position": {
+                              "basis": "40px",
+                              "grow": 1
+                            },
+                            "props": {
+                              "alignContent": "space-between",
+                              "alignItems": "flex-start",
+                              "direction": "column",
+                              "justify": "center"
+                            },
+                            "type": "ia.container.flex"
+                          }
+                        ],
+                        "meta": {
+                          "name": "Light Status"
+                        },
+                        "position": {
+                          "basis": "200px",
+                          "grow": 1
+                        },
+                        "props": {
+                          "alignContent": "center",
+                          "alignItems": "center",
+                          "direction": "column",
+                          "style": {
+                            "background-color": "#f2f2ff",
+                            "borderRadius": "10px",
+                            "marginBottom": "10px",
+                            "marginLeft": "10px"
+                          }
+                        },
+                        "type": "ia.container.flex"
+                      },
+                      {
+                        "children": [
+                          {
+                            "children": [
+                              {
+                                "meta": {
+                                  "name": "Label"
+                                },
+                                "position": {
+                                  "basis": "50px",
+                                  "grow": 1
+                                },
+                                "props": {
+                                  "text": "Temperature"
+                                },
+                                "type": "ia.display.label"
+                              }
+                            ],
+                            "meta": {
+                              "name": "Label"
+                            },
+                            "position": {
+                              "basis": "40px",
+                              "shrink": 0
+                            },
+                            "props": {
+                              "alignContent": "flex-start",
+                              "alignItems": "center"
+                            },
+                            "type": "ia.container.flex"
+                          },
+                          {
+                            "meta": {
+                              "name": "LedDisplay"
+                            },
+                            "position": {
+                              "basis": "50px"
+                            },
+                            "propConfig": {
+                              "props.value": {
+                                "binding": {
+                                  "config": {
+                                    "fallbackDelay": 2.5,
+                                    "mode": "direct",
+                                    "tagPath": "[default]Home/LivingRoom/Temperature_C"
+                                  },
+                                  "type": "tag"
+                                }
+                              }
+                            },
+                            "type": "ia.display.led-display"
+                          }
+                        ],
+                        "meta": {
+                          "name": "Temperature"
+                        },
+                        "position": {
+                          "basis": "200px",
+                          "grow": 1
+                        },
+                        "props": {
+                          "alignContent": "flex-start",
+                          "alignItems": "center",
+                          "direction": "column",
+                          "style": {
+                            "background-color": "#f2f2ff",
+                            "borderRadius": "10px",
+                            "marginBottom": "10px",
+                            "marginLeft": "10px",
+                            "marginRight": "10px"
+                          }
+                        },
+                        "type": "ia.container.flex"
+                      }
+                    ],
+                    "meta": {
+                      "name": "Datas"
+                    },
+                    "position": {
+                      "basis": "100px",
+                      "grow": 1
+                    },
+                    "props": {
+                      "justify": "space-between"
+                    },
+                    "type": "ia.container.flex"
+                  }
+                ],
+                "meta": {
+                  "name": "Living Room"
+                },
+                "position": {
+                  "basis": "300px",
+                  "grow": 1
+                },
+                "props": {
+                  "direction": "column",
+                  "style": {
+                    "background-color": "#f2fff3",
+                    "borderRadius": "10px",
+                    "marginLeft": "10px",
+                    "marginLeft_1": "10px"
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "meta": {
+                          "name": "Label"
+                        },
+                        "position": {
+                          "basis": "50px",
+                          "grow": 1
+                        },
+                        "props": {
+                          "style": {
+                            "alignItems": "center",
+                            "fontSize": 16,
+                            "fontWeight": "500"
+                          },
+                          "text": "Kitchen",
+                          "textStyle": {
+                            "alignItems": "center"
+                          }
+                        },
+                        "type": "ia.display.label"
+                      }
+                    ],
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "50px",
+                      "shrink": 0
+                    },
+                    "props": {
+                      "alignContent": "center",
+                      "alignItems": "center",
+                      "justify": "center"
+                    },
+                    "type": "ia.container.flex"
+                  },
+                  {
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "children": [
+                              {
+                                "meta": {
+                                  "name": "ToggleSwitch"
+                                },
+                                "position": {
+                                  "basis": "96px",
+                                  "grow": 1
+                                },
+                                "propConfig": {
+                                  "props.selected": {
+                                    "binding": {
+                                      "config": {
+                                        "fallbackDelay": 2.5,
+                                        "mode": "direct",
+                                        "tagPath": "[default]Home/Kitchen/LightStatus"
+                                      },
+                                      "type": "tag"
+                                    }
+                                  }
+                                },
+                                "props": {
+                                  "label": {
+                                    "position": "left",
+                                    "text": "Lights"
+                                  }
+                                },
+                                "type": "ia.input.toggle-switch"
+                              }
+                            ],
+                            "meta": {
+                              "name": "Light"
+                            },
+                            "position": {
+                              "basis": "40px",
+                              "grow": 1
+                            },
+                            "props": {
+                              "alignContent": "center",
+                              "alignItems": "center",
+                              "direction": "column"
+                            },
+                            "type": "ia.container.flex"
+                          },
+                          {
+                            "children": [
+                              {
+                                "meta": {
+                                  "name": "ToggleSwitch"
+                                },
+                                "position": {
+                                  "basis": "96px"
+                                },
+                                "propConfig": {
+                                  "props.selected": {
+                                    "binding": {
+                                      "config": {
+                                        "fallbackDelay": 2.5,
+                                        "mode": "direct",
+                                        "tagPath": "[default]Home/Kitchen/StoveStatus"
+                                      },
+                                      "type": "tag"
+                                    }
+                                  }
+                                },
+                                "props": {
+                                  "label": {
+                                    "position": "left",
+                                    "style": {
+                                      "alignItems": "stretch"
+                                    },
+                                    "text": "Stove"
+                                  }
+                                },
+                                "type": "ia.input.toggle-switch"
+                              }
+                            ],
+                            "meta": {
+                              "name": "Stove"
+                            },
+                            "position": {
+                              "basis": "40px",
+                              "grow": 1
+                            },
+                            "props": {
+                              "alignContent": "space-between",
+                              "alignItems": "flex-start",
+                              "direction": "column",
+                              "justify": "center",
+                              "style": {
+                                "marginBottom": "10px"
+                              }
+                            },
+                            "type": "ia.container.flex"
+                          }
+                        ],
+                        "meta": {
+                          "name": "Light Status_0"
+                        },
+                        "position": {
+                          "basis": "200px",
+                          "grow": 1
+                        },
+                        "props": {
+                          "alignContent": "center",
+                          "alignItems": "center",
+                          "direction": "column",
+                          "style": {
+                            "background-color": "#f2f2ff",
+                            "borderRadius": "10px",
+                            "marginBottom": "10px",
+                            "marginLeft": "10px"
+                          }
+                        },
+                        "type": "ia.container.flex"
+                      },
+                      {
+                        "children": [
+                          {
+                            "children": [
+                              {
+                                "meta": {
+                                  "name": "Label"
+                                },
+                                "position": {
+                                  "basis": "50px",
+                                  "grow": 1
+                                },
+                                "props": {
+                                  "text": "Humidity"
+                                },
+                                "type": "ia.display.label"
+                              }
+                            ],
+                            "meta": {
+                              "name": "Label"
+                            },
+                            "position": {
+                              "basis": "40px",
+                              "shrink": 0
+                            },
+                            "props": {
+                              "alignContent": "flex-start",
+                              "alignItems": "center"
+                            },
+                            "type": "ia.container.flex"
+                          },
+                          {
+                            "meta": {
+                              "name": "LedDisplay"
+                            },
+                            "position": {
+                              "basis": "50px"
+                            },
+                            "propConfig": {
+                              "props.value": {
+                                "binding": {
+                                  "config": {
+                                    "fallbackDelay": 2.5,
+                                    "mode": "direct",
+                                    "tagPath": "[default]Home/Kitchen/Humidity_"
+                                  },
+                                  "type": "tag"
+                                }
+                              }
+                            },
+                            "type": "ia.display.led-display"
+                          }
+                        ],
+                        "meta": {
+                          "name": "Humidity"
+                        },
+                        "position": {
+                          "basis": "200px",
+                          "grow": 1
+                        },
+                        "props": {
+                          "alignContent": "flex-start",
+                          "alignItems": "center",
+                          "direction": "column",
+                          "style": {
+                            "background-color": "#f2f2ff",
+                            "borderRadius": "10px",
+                            "marginBottom": "10px",
+                            "marginLeft": "10px",
+                            "marginRight": "10px"
+                          }
+                        },
+                        "type": "ia.container.flex"
+                      }
+                    ],
+                    "meta": {
+                      "name": "Datas"
+                    },
+                    "position": {
+                      "basis": "100px",
+                      "grow": 1
+                    },
+                    "props": {
+                      "justify": "space-between"
+                    },
+                    "type": "ia.container.flex"
+                  }
+                ],
+                "meta": {
+                  "name": "Kitchen"
+                },
+                "position": {
+                  "basis": "300px",
+                  "grow": 1
+                },
+                "props": {
+                  "direction": "column",
+                  "style": {
+                    "background-color": "#f2fff3",
+                    "borderRadius": "10px",
+                    "marginLeft": "10px",
+                    "marginLeft_1": "10px"
+                  }
+                },
+                "type": "ia.container.flex"
+              }
+            ],
+            "meta": {
+              "name": "Rooms"
+            },
+            "position": {
+              "basis": "180px",
+              "shrink": 0
+            },
+            "props": {
+              "style": {
+                "background-color": "#f5e3d4",
+                "marginRight": "10px",
+                "marginTop": "10px"
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "meta": {
+                          "name": "Label"
+                        },
+                        "position": {
+                          "basis": "50px",
+                          "grow": 1
+                        },
+                        "props": {
+                          "style": {
+                            "alignItems": "center",
+                            "fontSize": "20px"
+                          },
+                          "text": "Historical Trend"
+                        },
+                        "type": "ia.display.label"
+                      }
+                    ],
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "50px",
+                      "shrink": 0
+                    },
+                    "props": {
+                      "alignContent": "center",
+                      "alignItems": "center",
+                      "justify": "center"
+                    },
+                    "type": "ia.container.flex"
+                  },
+                  {
+                    "children": [
+                      {
+                        "meta": {
+                          "name": "TimeSeriesChart"
+                        },
+                        "position": {
+                          "basis": "400px",
+                          "grow": 1
+                        },
+                        "propConfig": {
+                          "props.series[0].data": {
+                            "binding": {
+                              "config": {
+                                "aggregate": "MinMax",
+                                "avoidScanClassValidation": true,
+                                "dateRange": {
+                                  "mostRecent": "1",
+                                  "mostRecentUnits": "HOUR"
+                                },
+                                "enableValueCache": true,
+                                "ignoreBadQuality": false,
+                                "polling": {
+                                  "enabled": false,
+                                  "rate": "30"
+                                },
+                                "preventInterpolation": false,
+                                "returnFormat": "Wide",
+                                "returnSize": {
+                                  "numRows": "100",
+                                  "type": "FIXED"
+                                },
+                                "tags": [
+                                  {
+                                    "path": "[SqLite_Database/ignition-macbook-air.local:default]home/livingroom/temperature_c"
+                                  }
+                                ],
+                                "valueFormat": "DATASET"
+                              },
+                              "type": "tag-history"
+                            }
+                          },
+                          "props.series[1].data": {
+                            "binding": {
+                              "config": {
+                                "aggregate": "MinMax",
+                                "avoidScanClassValidation": true,
+                                "dateRange": {
+                                  "mostRecent": "1",
+                                  "mostRecentUnits": "HOUR"
+                                },
+                                "enableValueCache": true,
+                                "ignoreBadQuality": false,
+                                "polling": {
+                                  "enabled": false,
+                                  "rate": "30"
+                                },
+                                "preventInterpolation": false,
+                                "returnFormat": "Wide",
+                                "returnSize": {
+                                  "numRows": "100",
+                                  "type": "FIXED"
+                                },
+                                "tags": [
+                                  {
+                                    "path": "[SqLite_Database/ignition-macbook-air.local:default]home/kitchen/humidity_"
+                                  }
+                                ],
+                                "valueFormat": "DATASET"
+                              },
+                              "type": "tag-history"
+                            }
+                          }
+                        },
+                        "props": {
+                          "legend": {
+                            "visible": true
+                          },
+                          "plots": [
+                            {
+                              "axes": [],
+                              "markers": [
+                                {
+                                  "axis": "",
+                                  "line": {
+                                    "color": "#DE1010",
+                                    "dashArray": 0,
+                                    "label": {
+                                      "font": {
+                                        "color": "",
+                                        "size": 10
+                                      },
+                                      "position": "right",
+                                      "style": {
+                                        "classes": ""
+                                      },
+                                      "text": ""
+                                    },
+                                    "opacity": 0.5,
+                                    "style": {
+                                      "classes": ""
+                                    },
+                                    "width": 1
+                                  },
+                                  "type": "line",
+                                  "value": 0,
+                                  "visible": true
+                                }
+                              ],
+                              "relativeWeight": 1,
+                              "trends": []
+                            }
+                          ],
+                          "series": [
+                            {
+                              "name": "Living Room Temp"
+                            },
+                            {
+                              "name": "Kitchen Humidity"
+                            }
+                          ],
+                          "xTrace": {
+                            "line": {
+                              "color": "#4C43EA"
+                            }
+                          }
+                        },
+                        "type": "ia.chart.timeseries"
+                      }
+                    ],
+                    "meta": {
+                      "name": "Chart"
+                    },
+                    "position": {
+                      "basis": "200px",
+                      "grow": 1
+                    },
+                    "props": {
+                      "style": {
+                        "background-color": "#f2f2ff",
+                        "borderRadius": "5px",
+                        "margin": "5px"
+                      }
+                    },
+                    "type": "ia.container.flex"
+                  }
+                ],
+                "meta": {
+                  "name": "Historical Trend"
+                },
+                "position": {
+                  "basis": "300px",
+                  "grow": 1
+                },
+                "props": {
+                  "direction": "column",
+                  "justify": "center",
+                  "style": {
+                    "background-color": "#f2fff3",
+                    "borderRadius": "20px",
+                    "marginBottom": "10px",
+                    "marginLeft": "10px",
+                    "marginTop": "10px"
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "meta": {
+                          "name": "Label"
+                        },
+                        "position": {
+                          "basis": "50px",
+                          "grow": 1
+                        },
+                        "props": {
+                          "style": {
+                            "alignItems": "center",
+                            "fontSize": "20px"
+                          },
+                          "text": "Energy Analytics"
+                        },
+                        "type": "ia.display.label"
+                      }
+                    ],
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "50px",
+                      "shrink": 0
+                    },
+                    "props": {
+                      "alignContent": "center",
+                      "alignItems": "center",
+                      "justify": "center"
+                    },
+                    "type": "ia.container.flex"
+                  },
+                  {
+                    "children": [
+                      {
+                        "meta": {
+                          "name": "CylindricalTank"
+                        },
+                        "position": {
+                          "basis": "100px",
+                          "grow": 1
+                        },
+                        "propConfig": {
+                          "props.value": {
+                            "binding": {
+                              "config": {
+                                "fallbackDelay": 2.5,
+                                "mode": "direct",
+                                "tagPath": "[default]Home/Alarms/Current Alarm"
+                              },
+                              "type": "tag"
+                            }
+                          }
+                        },
+                        "type": "ia.display.cylindrical-tank"
+                      },
+                      {
+                        "children": [
+                          {
+                            "meta": {
+                              "name": "Label"
+                            },
+                            "position": {
+                              "basis": "50px",
+                              "shrink": 0
+                            },
+                            "props": {
+                              "text": "Current Supplied",
+                              "textStyle": {
+                                "alignSelf": "center"
+                              }
+                            },
+                            "type": "ia.display.label"
+                          },
+                          {
+                            "meta": {
+                              "name": "Gauge",
+                              "tooltip": {
+                                "text": "Current"
+                              }
+                            },
+                            "position": {
+                              "basis": "300px",
+                              "grow": 1
+                            },
+                            "propConfig": {
+                              "props.value": {
+                                "binding": {
+                                  "config": {
+                                    "fallbackDelay": 2.5,
+                                    "mode": "direct",
+                                    "tagPath": "[default]Home/Alarms/Current Alarm"
+                                  },
+                                  "type": "tag"
+                                }
+                              }
+                            },
+                            "props": {
+                              "backgroundColor": "",
+                              "innerAxis": {
+                                "data": "secondaryValue",
+                                "maxValue": 80,
+                                "percentRadius": 85,
+                                "show": false,
+                                "width": 1
+                              },
+                              "outerAxis": {
+                                "data": "value",
+                                "maxValue": 120,
+                                "percentRadius": 100,
+                                "ranges": [
+                                  {
+                                    "color": "#77B6D8",
+                                    "end": 80,
+                                    "start": 0,
+                                    "width": 8
+                                  },
+                                  {
+                                    "color": "#6E94D7",
+                                    "end": 105,
+                                    "start": 80,
+                                    "width": 12
+                                  },
+                                  {
+                                    "color": "#7A6BD5",
+                                    "end": 120,
+                                    "start": 105,
+                                    "width": 16
+                                  }
+                                ],
+                                "show": true,
+                                "width": 1
+                              }
+                            },
+                            "type": "ia.chart.gauge"
+                          }
+                        ],
+                        "meta": {
+                          "name": "FlexContainer"
+                        },
+                        "position": {
+                          "basis": "200px",
+                          "grow": 1
+                        },
+                        "props": {
+                          "direction": "column"
+                        },
+                        "type": "ia.container.flex"
+                      }
+                    ],
+                    "meta": {
+                      "name": "Chart"
+                    },
+                    "position": {
+                      "basis": "200px",
+                      "grow": 1
+                    },
+                    "props": {
+                      "style": {
+                        "background-color": "#f2f2ff",
+                        "borderRadius": "5px",
+                        "margin": "5px"
+                      }
+                    },
+                    "type": "ia.container.flex"
+                  }
+                ],
+                "meta": {
+                  "name": "Energy Analytics"
+                },
+                "position": {
+                  "basis": "300px",
+                  "grow": 1
+                },
+                "props": {
+                  "direction": "column",
+                  "justify": "center",
+                  "style": {
+                    "background-color": "#f2fff3",
+                    "borderRadius": "20px",
+                    "marginBottom": "10px",
+                    "marginLeft": "10px",
+                    "marginTop": "10px"
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "meta": {
+                          "name": "Label"
+                        },
+                        "position": {
+                          "basis": "50px",
+                          "grow": 1
+                        },
+                        "props": {
+                          "style": {
+                            "alignItems": "center",
+                            "fontSize": "20px"
+                          },
+                          "text": "Floor Plan View"
+                        },
+                        "type": "ia.display.label"
+                      }
+                    ],
+                    "meta": {
+                      "name": "Floor Plan Label"
+                    },
+                    "position": {
+                      "basis": "50px",
+                      "shrink": 0
+                    },
+                    "props": {
+                      "alignContent": "center",
+                      "alignItems": "center",
+                      "justify": "center"
+                    },
+                    "type": "ia.container.flex"
+                  },
+                  {
+                    "children": [
+                      {
+                        "meta": {
+                          "name": "Image"
+                        },
+                        "props": {
+                          "altText": "Floor Plan",
+                          "fit": {
+                            "mode": "cover",
+                            "scroll": true
+                          },
+                          "source": "/system/images/FloorPlan.png"
+                        },
+                        "type": "ia.display.image"
+                      }
+                    ],
+                    "meta": {
+                      "name": "BreakpointContainer"
+                    },
+                    "position": {
+                      "basis": "100px",
+                      "grow": 1
+                    },
+                    "type": "ia.container.breakpt"
+                  }
+                ],
+                "meta": {
+                  "name": "Floor Plan view"
+                },
+                "position": {
+                  "basis": "300px",
+                  "grow": 1
+                },
+                "props": {
+                  "direction": "column",
+                  "justify": "center",
+                  "style": {
+                    "background-color": "#f2fff3",
+                    "borderRadius": "20px",
+                    "marginBottom": "10px",
+                    "marginLeft": "10px",
+                    "marginTop": "10px"
+                  }
+                },
+                "type": "ia.container.flex"
+              }
+            ],
+            "meta": {
+              "name": "Data Analytics"
+            },
+            "position": {
+              "basis": "500px",
+              "grow": 1
+            },
+            "props": {
+              "style": {
+                "background-color": "#f5e3d4",
+                "marginRight": "10px"
+              }
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "Main Dashboard"
+        },
+        "position": {
+          "basis": "200px",
+          "grow": 1
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "background-color": "#f5e3d4"
+          }
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column"
+    },
+    "type": "ia.container.flex"
+  }
+}

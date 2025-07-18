@@ -1,0 +1,37 @@
+{
+  "pages": {
+    "/Home": {
+      "docks": {
+        "top": [
+          {
+            "anchor": "fixed",
+            "autoBreakpoint": 480,
+            "content": "push",
+            "handle": "hide",
+            "iconUrl": "",
+            "id": "",
+            "modal": false,
+            "resizable": false,
+            "show": "visible",
+            "size": 150,
+            "viewParams": {},
+            "viewPath": "Monitor"
+          }
+        ]
+      },
+      "title": "",
+      "viewPath": "Monitor"
+    },
+    "/RoomContainer": {
+      "title": "RoomContainer",
+      "viewPath": "Monitor"
+    },
+    "/admin": {
+      "title": "",
+      "viewPath": "Dashboard"
+    }
+  },
+  "sharedDocks": {
+    "cornerPriority": "top-bottom"
+  }
+}

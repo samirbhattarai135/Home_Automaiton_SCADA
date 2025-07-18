@@ -1,0 +1,56 @@
+{
+ "root": {
+        "type": "ia.container.flex",
+        "props": {"direction": "column"},
+        "children": [
+            {
+                "type": "ia.input.label",
+                "props": {
+                    "text": "🏠 Smart Home SCADA Dashboard",
+                    "style": {
+                        "fontSize": "24px",
+                        "fontWeight": "bold",
+                        "margin": "10px"
+                    }
+                },
+                "meta": {"name": "Header"}
+            },
+            {
+                "type": "ia.container.flex",
+                "props": {"direction": "row"},
+                "meta": {"name": "RoomContainer"},
+                "children": [
+                    {
+                        "type": "ia.container.flex",
+                        "props": {"direction": "column"},
+                        "meta": {"name": "LivingRoomCard"}
+                    },
+                    {
+                        "type": "ia.container.flex",
+                        "props": {"direction": "column"},
+                        "meta": {"name": "KitchenCard"}
+                    },
+                    {
+                        "type": "ia.container.flex",
+                        "props": {"direction": "column"},
+                        "meta": {"name": "BedroomCard"}
+                    }
+                ]
+            },
+            {
+                "type": "ia.container.coordinate",
+                "props": {},
+                "meta": {"name": "AlarmPanel"}
+            },
+            {
+                "type": "ia.container.flex",
+                "props": {"direction": "column"},
+                "meta": {"name": "EnergyChartContainer"}
+            }
+        ]
+    },
+    "meta": {
+        "name": "root",
+        
+    }
+}
