@@ -1,6 +1,6 @@
 # Smart Home SCADA Dashboard
 
-![Smart Home Dashboard Screenshot](https://i.imgur.com/your-screenshot-url.png) <!-- Replace with a URL to your dashboard screenshot -->
+![Smart Home Dashboard Screenshot](https://github.com/samirbhattarai135/Home_Automaiton_SCADA/blob/main/Dashboard_image.png) 
 
 A comprehensive SCADA dashboard for smart home automation, built using the Ignition Perspective module. This project provides real-time monitoring, device control, and historical data analysis for a typical home environment, with data sourced from ESP32 microcontrollers via MQTT and Node-RED.
 
@@ -19,6 +19,7 @@ A comprehensive SCADA dashboard for smart home automation, built using the Ignit
   - **Real-time** power consumption.
   - **Historical** energy usage with a daily bar graph.
 - **Interactive Floor Plan:** A visual, map-based view of the home for intuitive device location and status checks.
+- **Mobile Responsiveness:** Implement a Breakpoint Container to create a tailored layout for mobile devices.
 
 ---
 
@@ -26,7 +27,7 @@ A comprehensive SCADA dashboard for smart home automation, built using the Ignit
 
 - **Platform:** [Ignition by Inductive Automation](https://inductiveautomation.com/) (Version 8.1.x)
 - **SCADA Module:** **Ignition Perspective**
-- **Hardware:** **ESP32, Flame Sensor, Temp/Humidity Sensor, Leds** ESP32 Microcontroller for sensor data collection and forwarding.
+- **Hardware:** **ESP32, Flame Sensor, Temp/Humidity Sensor, Leds**  for sensor data collection, forwarding, and actuation.
 - **Communication:** **MQTT Module** for lightweight broker service and messaging.
 - **Middleware:** **Node-RED** for data processing and routing.
 - **Database:** **SQLite** for Tag History logging.
@@ -43,7 +44,9 @@ The data flows from the physical sensors to the dashboard following this archite
 4.  **Ignition MQTT Engine:** Ignition's MQTT Engine module publishes to the topics from Node-RED, creating and updating Ignition tags automatically.
 5.  **Perspective Dashboard:** The dashboard components bind to these Ignition tags to display the live data.
 
-![Node-Red Diagram](https://i.imgur.com/your-architecture-diagram.png) <!-- Optional: Replace with a URL to an architecture diagram -->
+
+## Node-Red Architecture
+![Node-Red Diagram](https://github.com/samirbhattarai135/Home_Automaiton_SCADA/blob/main/Node-Red_Configs/Connection%20Image.png?raw=true) 
 
 ---
 
@@ -99,16 +102,6 @@ To get this project running in your own Ignition gateway, follow these steps:
 - **`/views/templates/RoomCard`**: A reusable template for displaying room-specific information.
 - **`/tags/`**: User-Defined Types (UDTs) are used to structure tags for each room (e.g., `RoomUDT` containing Temperature, Humidity, and device tags).
 - **`/named-queries/`**: Contains the SQL queries used to aggregate data for the Energy Management bar chart.
-
----
-
-## 🔮 Future Improvements
-
-- **Mobile Responsiveness:** Implement a Breakpoint Container to create a tailored layout for mobile devices.
-- **User Authentication:** Add a login screen and restrict controls to authorized users.
-- **Push Notifications:** Integrate with the Ignition Alarm Notification module to send email or SMS alerts for critical alarms.
-- **Deeper Device Integration:** Connect to more smart home APIs (e.g., Philips Hue, Nest) for expanded control.
-
 ---
 
 ## 🤝 Contributing
