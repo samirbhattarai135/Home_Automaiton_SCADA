@@ -22,8 +22,8 @@
   },
   "props": {
     "defaultSize": {
-      "height": 918,
-      "width": 1235
+      "height": 891,
+      "width": 1221
     }
   },
   "root": {
@@ -496,6 +496,7 @@
                                   "props.selected": {
                                     "binding": {
                                       "config": {
+                                        "bidirectional": true,
                                         "fallbackDelay": 2.5,
                                         "mode": "direct",
                                         "tagPath": "[default]Home/Bedroom/FanStatus"
@@ -591,7 +592,7 @@
                                   "config": {
                                     "fallbackDelay": 2.5,
                                     "mode": "direct",
-                                    "tagPath": "[default]Home/Bedroom/Temperature_C"
+                                    "tagPath": "[MQTT Engine]Esp32_Data_Folder/esp32/temperature"
                                   },
                                   "type": "tag"
                                 }
@@ -852,7 +853,7 @@
                                   "config": {
                                     "fallbackDelay": 2.5,
                                     "mode": "direct",
-                                    "tagPath": "[default]Home/LivingRoom/Temperature_C"
+                                    "tagPath": "[MQTT Engine]Esp32_Data_Folder/esp32/temperature"
                                   },
                                   "type": "tag"
                                 }
